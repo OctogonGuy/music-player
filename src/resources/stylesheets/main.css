@@ -1,0 +1,949 @@
+/* --- Colors to add in theme stylesheets --- */
+.root {
+	-cell-1-color: #f1f8fc;
+	-cell-2-color: #eaf3fd;
+	-slider-thumb-color: #2b2bf1;
+	-scroll-bar-color: #e4e4e4;
+	-scroll-bar-track-color: #fdfdfd;
+	-scroll-bar-arrow-color: #727272;
+	-border-color: #727272;
+	-foreground-color: #87ceeb;
+	-background-color: #e2eff5;
+	-menu-color: #fdfdfd;
+	-history-bar-color: #f1f8fc;
+	-text-color: #1d1d4d;
+	-selected-text-color: #f0eefa;
+	-playing-text-color: #2b2bf1;
+	-hover-color: #b0c4de;
+	-select-color: #5969c5;
+	-track-list-header-color: #fdfdfd;
+	-track-list-header-text-color: #727272;
+	-track-list-edit-color: #2b2bf1;
+	-control-button-color-top: #326ff3;
+	-control-button-color-bottom: #82f1f1;
+	-control-button-hover-color-top: #399ac7;
+	-control-button-hover-color-bottom: #8bf1ec;
+	-history-button-color-top: #80bbd6;
+	-history-button-color-bottom: #c3e4ec;
+	-directory-node-graphic-color: #3e3ec0;
+	
+	-slider-track-color: derive(-foreground-color, -30%);
+	-menu-text-color: -text-color;
+	-menu-select-color: -select-color;
+	-menu-selected-text-color: -selected-text-color;
+	-background-text-color: -text-color;
+	-control-text-color: -text-color;
+	-track-list-text-color: -text-color;
+	-history-button-text-color: -text-color;
+	-control-button-text-color: -text-color;
+	-split-pane-color: -foreground-color;
+	-corner-color: -background-color;
+	-scroll-bar-thumb-color: -scroll-bar-color;
+	-hover-1-color: -hover-color;
+	-hover-2-color: -hover-color;
+	-selected-1-color: -select-color;
+	-selected-2-color: -select-color;
+	-search-bar-color: -menu-color;
+	-search-bar-text-color: -menu-text-color;
+	-search-bar-highlight-color: -menu-select-color;
+	-search-bar-highlight-text-color: -menu-selected-text-color;
+	-selected-playing-text-color: -playing-text-color;
+	
+	-history-bar-gradient: linear-gradient(to bottom,
+		derive(-history-bar-color, 6%),
+		derive(-history-bar-color, -6%));
+	-track-list-header-gradient: linear-gradient(to bottom,
+		derive(-track-list-header-color, 6%),
+		derive(-track-list-header-color, -6%));
+}
+
+
+
+/* General */
+
+.root * {
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-text-fill: -text-color;
+}
+
+.cell {
+	-fx-cell-size: 2em;
+	-fx-alignment: center-left;
+}
+
+#navigator: focused, #track-list: focused, #directory-view: focused, #sidebar: focused {
+	-fx-background-insets: 1;	/* To prevent on focus border changes */
+}
+
+.button: focused, .toggle-button: focused {
+	-fx-background-insets: 0 0 -1 0;	/* To prevent on focus border changes */
+}
+
+/* Scroll pane */
+
+.scroll-pane {
+	-fx-background: transparent;	/* Needed instead of -fx-background-color */
+	-fx-background-color: transparent;	/* Hides weird gray border */
+	-fx-padding: 0; /* Removes default 1.0 padding */
+}
+
+/* Scroll bar */
+
+.scroll-bar .thumb {
+	-fx-background-radius: 1.33em;
+	-fx-border-radius: 1.33em;
+	-fx-border-width: 1px;
+}
+
+.scroll-bar .track {
+	-fx-background-radius: 1.33em;
+	-fx-border-radius: 1.33em;
+	-fx-border-width: 1px;
+}
+
+.scroll-bar .increment-button, .scroll-bar .decrement-button {
+	-fx-background-radius: 0.14em;
+}
+
+.scroll-bar: vertical .increment-button, .scroll-bar: vertical .decrement-button {
+	-fx-pref-width: 1.51em;
+	-fx-pref-height: 1.36em;
+}
+
+.scroll-bar: horizontal .increment-button, .scroll-bar: horizontal .decrement-button {
+	-fx-pref-width: 1.36em;
+	-fx-pref-height: 1.51em;
+}
+
+/* Split pane */
+
+.split-pane {
+	-fx-padding: 1px;
+}
+.split-pane-divider {
+	-fx-padding: 2px 1px 1px 2px;
+}
+.split-pane-divider .horizontal-grabber, .split-pane-divider .vertical-grabber {
+	-fx-padding: 3px;
+}
+
+/* Background */
+
+#navigator, #currently-playing-view {
+	-fx-background-color: linear-gradient(to bottom,
+			derive(-background-color, -6%), -background-color 20%,
+			-background-color 85%, derive(-background-color, 6%));
+}
+
+#sidebar {
+	-fx-background-color: -background-color;
+}
+
+
+
+/* Control box */
+
+#control-box {
+	-fx-padding: 0.21em 0.42em 0.35em 0.42em;
+	-fx-vgap: 0.28em;
+}
+
+#control-box-top {
+	-fx-spacing: 0.2em;
+}
+
+#control-box-left, #control-box-right {
+	-fx-min-width: 7em;
+}
+
+#control-box .label {
+	-fx-text-fill: -control-text-color;
+}
+
+/* Buttons */
+
+#control-box .button .text {
+	-fx-font-family: sans-serif;
+	-fx-font-size: 1.5em;
+	-fx-opacity: 0.92;
+	-fx-effect: innershadow(gaussian, ladder(-control-button-text-color, rgb(0, 0, 0, 0.95) 49%, rgb(0, 0, 0, 0.5) 50%), 0, 0, 0, 0.08em);
+}
+
+#control-box .button {
+	-fx-text-fill: -control-button-text-color;
+	
+	-fx-padding: 0;
+	
+	-control-box-button-width: 1.825em;
+	-control-box-button-height: 1.6em;
+	
+	-fx-min-width: -control-box-button-width;
+	-fx-pref-width: -control-box-button-width;
+	-fx-max-width: -control-box-button-width;
+	-fx-min-height: -control-box-button-height;
+	-fx-pref-height: -control-box-button-height;
+	-fx-max-height: -control-box-button-height;
+	
+	-top-color: -control-button-color-top;
+	-bottom-color: -control-button-color-bottom;
+	-fx-background-color:
+		linear-gradient(to bottom, -top-color, -bottom-color),
+		radial-gradient(center 50% 0%, radius 100%,
+			rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2) 99%, transparent 99%);
+	-fx-background-insets: 0, 0.03em 0.23em 0.8em 0.23em;
+	-fx-background-radius: 43%, 50% 50% 43% 43%;
+
+    -fx-effect: dropshadow(two-pass-box, rgba(0, 0, 0, 0.3), 4, 0, 0, 0.2em);
+}
+
+#control-box .button:pressed {
+	-fx-translate-y: 1px;
+}
+
+#control-box .button:hover {
+	-top-color: -control-button-hover-color-top;
+	-bottom-color: -control-button-hover-color-bottom;
+}
+
+#control-box .toggle-button:selected {
+	-top-color: derive(-control-button-color-top, -25%);
+	-bottom-color: derive(-control-button-color-bottom, -25%);
+}
+
+#control-box .toggle-button:selected:hover {
+	-top-color: derive(-control-button-hover-color-top, -25%);
+	-bottom-color: derive(-control-button-hover-color-bottom, -25%);
+}
+
+/* Sliders */
+
+#control-box .slider .track {
+	-fx-cursor: hand;
+}
+
+#control-box .slider .thumb {
+	-fx-cursor: hand;
+	-fx-effect: dropshadow(two-pass-box, rgba(0, 0, 0, 0.3), 4, 0, 0, 0.2em);
+}
+
+#volume-slider {
+	-fx-pref-width: 5.15em;
+}
+
+/* Button layout */
+
+#control-box-right {
+	-fx-spacing: 0.21em;
+}
+
+#control-box #play-button .text {
+	-fx-font-size: 2.5em;
+}
+#control-box #play-button {
+	-control-box-button-width: 1.333333em;
+	-control-box-button-height: 1.333333em;
+	-fx-padding: -0.083333em 0 0 0.0416665em;
+	-fx-background-radius: 50%, 50%;
+	-fx-background-insets: 0, 0.03em 0.24em 0.5333em 0.24em;
+}
+#control-box #play-button-pane {
+	-fx-padding: 0.083em;
+}
+
+#control-box #previous-button .text, #control-box #next-button .text {
+	-fx-font-size: 1.5em;
+}
+#control-box #previous-button, #control-box #next-button {
+	-fx-font-size: 1.5em;
+	-control-box-button-width: 1.99em;
+	-control-box-button-height: 1.33em;
+}
+#control-box #previous-button {
+	-fx-padding: -0.14em -0.1em 0 0;
+	-fx-background-radius:
+		45% 20% 20% 45%,
+		50% 28% 37% 45%;
+	-fx-background-insets: 0, 0.03em 0.08em 0.65em 0.30em;
+}
+#control-box #next-button {
+	-fx-padding: -0.14em 0 0 -0.1em;
+	-fx-background-radius:
+		20% 45% 45% 20%,
+		28% 50% 45% 37%;
+	-fx-background-insets: 0, 0.03em 0.30em 0.65em 0.08em;
+}
+#control-box #previous-button-pane {
+	-fx-padding: 0 0 0 0.25em;
+}
+#control-box #next-button-pane {
+	-fx-padding: 0 0.25em 0 0;
+}
+
+#control-box #stop-button-pane {
+	-fx-padding: 0 0 0 0.25em;
+}
+#control-box #mute-button-pane {
+	-fx-padding: 0 0.083em 0 0;
+}
+#control-box #repeat-button-pane {
+	-fx-padding: 0 0 0 0.0167em;
+}
+
+
+
+/* Menu bar */
+
+#menu-bar > .container > .menu-button,
+#menu-bar .menu-item {
+	-fx-padding: 0.2em 0.5em;
+}
+
+
+
+/* History bar */
+
+#history-bar {
+	-fx-spacing: 10px;
+	-fx-padding: 1px 5px 1px 5px;
+	-fx-border-color: -border-color;
+	-fx-border-width: 1px 0 1px 0;
+}
+
+#history-bar .button-box {
+	-fx-spacing: 1px;
+}
+
+#history-bar .directory-box {
+	-fx-spacing: 2px;
+}
+#history-bar .button {
+	-fx-text-fill: -history-button-text-color;
+	
+	-top-color: -history-button-color-top;
+	-bottom-color: -history-button-color-bottom;
+
+	-fx-background-color:
+		linear-gradient(to bottom, -top-color, -bottom-color),
+		linear-gradient(to bottom,
+			rgba(255, 255, 255, 0.8) 2%, rgba(255, 255, 255, 0.2) 50%,
+			transparent 50%);
+
+	-fx-padding: 0.25em 0.5em;
+}
+#history-bar .button:hover {
+	-top-color: derive(-history-button-color-top, 22%);
+	-bottom-color: derive(-history-button-color-bottom, 22%);
+}
+#history-bar .button:pressed {
+	-top-color: derive(-history-button-color-top, -13%);
+	-bottom-color: derive(-history-button-color-bottom, -13%);
+}
+#history-bar .directory-box {
+	-fx-background-color: transparent;
+	-fx-padding: 0;
+}
+#history-bar .directory-box .button {
+	-fx-background-insets: 0, 0.05em;
+	-fx-background-radius: 0.2em, 0.2em;
+	-fx-border-color: derive(-history-button-color-top, -10%);
+	-fx-border-width: 1px;
+	-fx-border-radius: 0.2em, 0.2em;
+}
+
+#history-bar .button-box .button .text {
+	-fx-font-family: sans-serif;
+}
+#back-button {
+	-fx-background-insets: 0, 0.05em 1px 0.05em 0.05em;
+	-fx-background-radius: 50% 0% 0% 50%, 50% 0% 0% 50%;
+	-fx-border-color: derive(-history-button-color-top, -33%);
+	-fx-border-width: 1px;
+	-fx-border-radius: 50% 0% 0% 50%;
+	-fx-border-insets: 0 -1px 0 0;
+}
+#forward-button {
+	-fx-background-insets: 0, 0.05em 0.05em 0.05em 1px;
+	-fx-background-radius: 0% 50% 50% 0%, 0% 50% 50% 0%;
+	-fx-border-color: derive(-history-button-color-top, -33%);
+	-fx-border-width: 1px;
+	-fx-border-radius: 0% 50% 50% 0%;
+	-fx-border-insets: 0 0 0 -1px;
+}
+
+#search-bar {
+	-fx-background-color: -search-bar-color;
+	-fx-text-fill: -search-bar-text-color;
+	-fx-highlight-fill: -search-bar-highlight-color;
+	-fx-highlight-text-fill: -search-bar-highlight-text-color;
+	-fx-border-color: -border-color;
+	
+	/* For some reason, positive derive produces inconsistent results */
+	-fx-prompt-text-fill: ladder(-search-bar-color,
+		derive(-search-bar-color, 40%) 49%, derive(-search-bar-color, -40%) 50%);
+	
+	-fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.1), 0.8em, 0.33, 0, 0.2em);
+	-fx-padding: 0.25em 0.5em;
+}
+
+
+
+/* Explorer */
+
+#sidebar {
+	-fx-border-color: -border-color;
+	-fx-border-width: 1px;
+	-fx-padding: 0;
+}
+
+#sidebar .list-cell {
+	-fx-padding: 0.33em 0 0.33em 0.67em;
+}
+
+#sidebar .list-cell: empty {
+	-fx-background-color: transparent;
+}
+
+#sidebar .scroll-bar  {
+	-fx-border-insets: -1px -1px -1px 0;
+	-fx-background-insets: -1px -1px -1px 0;
+}
+
+#sidebar .scroll-bar .track, #sidebar .scroll-bar .thumb {
+	-fx-border-insets: 0 0 0 -1px;
+	-fx-background-insets: 0 0 0 -1px;
+}
+
+
+
+/* Navigator */
+
+#navigator {
+	-fx-border-color: -border-color;
+}
+
+/* To make sure only one pixel is showing */
+#navigator .scroll-bar: vertical {
+	-fx-border-width: 1px 0 0 1px;
+	-fx-border-insets: -1px 0 0 0;
+}
+#navigator .scroll-bar: horizontal {
+	-fx-border-width: 1px 0 0 1px;
+	-fx-border-insets: 0 0 0 0;
+}
+#navigator .scroll-bar: vertical .track, #navigator .scroll-bar: vertical .thumb {
+	-fx-border-insets: 0 -1px 0 -1px;
+	-fx-background-insets: 0 -1px 0 -1px;
+}
+#navigator .scroll-bar: horizontal .track, #navigator .scroll-bar: horizontal .thumb {
+	-fx-border-insets: -1px 0 0 0;
+	-fx-background-insets: -1px 0 0 0;
+}
+#navigator .corner {
+	-fx-border-color: -border-color;
+	-fx-border-width: 1px 0 0 1px;
+}
+
+
+
+/* Currently playing view */
+
+#currently-playing-view {
+	-fx-border-color: -border-color;
+	-fx-border-width: 1px 0;
+}
+
+
+
+/* Directory view */
+
+#directory-view {
+	-fx-background-color: transparent;
+}
+
+#directory-view .scroll-bar:vertical {
+	-fx-background-insets: 0;
+}
+
+#directory-view FlowPane {
+	-fx-hgap: 0.84em;
+	-fx-vgap: 0.56em;
+	-fx-padding: 0.35em 0.07em 0.35em 0.35em;
+}
+
+.directory-node {
+	-fx-background-color: linear-gradient(to bottom,
+		derive(-cell-1-color, 20%), -cell-1-color 25%,
+		-cell-1-color 75%, derive(-cell-1-color, -12.5%)
+	);
+	-fx-border-color: -border-color;
+	-fx-vgap: 0.3em;
+	-fx-padding: 0.56em 0.2em 0.36em 0.2em;
+	-fx-effect: dropshadow(two-pass-box, rgba(0, 0, 0, 0.3), 6, 0.0, 0, 0.3em);
+}
+.directory-node.no-text {
+	-fx-padding: 1.2em;
+	-fx-vgap: 0;
+	-fx-alignment: center;
+}
+
+.directory-node .graphic-container {
+	-fx-pref-width: 7em;
+	-fx-pref-height: 7em;
+}
+
+.directory-node .shape, .directory-node .mask {
+	-fx-background-color: -directory-node-graphic-color;
+	-fx-fill: -directory-node-graphic-color;
+	-fx-border-width: 0.21em;
+	-fx-border-color: derive(-directory-node-graphic-color, -50%);
+}
+
+.directory-node .label {
+	-fx-max-height: 3.75em;
+	-fx-pref-width: 9em;
+}
+
+
+/* Track view */
+
+#track-view {
+	-fx-spacing: 0.28em;
+}
+
+#album-info-box {
+	-fx-padding: 0.28em;
+	-fx-hgap: 0.84em;
+}
+
+#album-info-box .graphic-container {
+	-fx-pref-height: 9.8em;
+}
+
+#album-info-box .image-view {
+	-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.22), 10, 0.1, 0, 4);
+}
+
+#album-info-box .label {
+	-fx-text-fill: -background-text-color;
+}
+
+.table-view {
+	-fx-background-color: transparent;
+	-fx-padding: -1px 0 0 0;
+}
+
+.table-view .show-hide-columns-button {
+	-color: -cell-1-color;
+	-fx-background-color: -color;
+	-fx-border-color:
+		derive(-color, 33%)
+		derive(-color, -22%)
+		derive(-color, -22%)
+		derive(-color, -33%),
+		-border-color;
+	-fx-border-width: 0.083333em, 0 0 0 1px;
+	-fx-border-insets: 0 0 0 1px, 0;
+}
+
+.table-view .show-hide-columns-button:pressed {
+	-fx-border-color:
+		derive(-color, -33%)
+		derive(-color, 22%)
+		derive(-color, 22%)
+		derive(-color, 33%),
+		-border-color;
+}
+
+.table-view .show-hide-columns-button .show-hide-column-image {
+	-fx-background-color: -directory-node-graphic-color;
+}
+
+.column-header {
+	-fx-background-color: transparent;
+}
+
+.column-header .label {
+	-fx-padding: 0.33em 0;
+}
+
+.column-header-background {
+	-fx-border-color: -border-color;
+	-fx-border-width: 1px 0 1px 0;
+}
+
+.column-header {
+	-fx-border-color:
+		derive(-track-list-header-color, 40%)
+		derive(-track-list-header-color, -20%)
+		derive(-track-list-header-color, -40%)
+		derive(-track-list-header-color, -20%),
+		derive(-track-list-header-color, -20%)
+		derive(-track-list-header-color, -30%)
+		derive(-track-list-header-color, -60%)
+		derive(-track-list-header-color, -30%);
+	-fx-border-width: 1, 1;
+	-fx-border-insets: 2, 1;
+}
+
+.column-header:pressed {
+	-fx-border-color:
+		derive(-track-list-header-color, -40%)
+		derive(-track-list-header-color, -10%)
+		derive(-track-list-header-color, 40%)
+		derive(-track-list-header-color, -10%),
+		derive(-track-list-header-color, -60%)
+		derive(-track-list-header-color, -15%)
+		derive(-track-list-header-color, -20%)
+		derive(-track-list-header-color, -15%);
+}
+
+#track-list .scroll-bar:horizontal {
+	-fx-border-width: 1px 0 0 0;
+}
+
+#track-list .scroll-bar: vertical .track, #track-list .scroll-bar: vertical .thumb {
+	-fx-border-insets: 0 0 0 -1px;
+}
+
+/* Song row */
+
+#track-list .table-row-cell: filled {
+	-fx-padding: -1;	/* In order to prevent cells from shrinking */
+}
+
+.song-row: empty {
+	-fx-background-color: transparent;
+}
+
+/* Song cell */
+
+.song-cell {
+	-fx-padding: 0 0 0 0.33em;
+	-fx-background-color: transparent;
+	-fx-border-color: transparent -border-color transparent transparent;
+	-fx-border-width: 1px;
+}
+
+.song-cell: empty {
+	-fx-border-color: transparent;
+}
+
+.song-row: filled {
+	-fx-border-color: transparent transparent -border-color transparent;
+	-fx-border-width: 1px;
+}
+
+
+
+
+/* Multiple */
+
+.song-row:filled:odd, #sidebar .list-cell:filled:odd {
+	-cell-color: -cell-1-color;
+}
+
+.song-row:filled:even, #sidebar .list-cell:filled:even {
+	-cell-color: -cell-2-color;
+}
+
+.song-row:filled, #sidebar .list-cell:filled {
+	-fx-background-color: linear-gradient(to bottom,
+		derive(-cell-color, 3%), -cell-color 40%,
+		-cell-color 60%, derive(-cell-color, -3%));
+}
+
+
+
+
+
+/* --- Colors! --- */
+
+/* Control box */
+#control-box {
+	-foreground-color-dark: derive(-foreground-color, -12.5%);
+	-foreground-color-light: derive(-foreground-color, 25%);
+	-fx-background-color: linear-gradient(to bottom,
+		-foreground-color-dark 0%, -foreground-color 1%,
+		-foreground-color 3%, -foreground-color-light 10%, -foreground-color 25%,
+		-foreground-color 70%, -foreground-color-dark 100%);
+}
+
+
+
+/* Split pane */
+.split-pane {
+	-fx-background-color: -split-pane-color;
+}
+.split-pane:horizontal .split-pane-divider {
+	-fx-background-color: linear-gradient(to right,
+		derive(-split-pane-color, -20%), -split-pane-color, derive(-split-pane-color, -20%));
+}
+.split-pane:vertical .split-pane-divider {
+	-fx-background-color: linear-gradient(to bottom,
+		derive(-split-pane-color, -20%), -split-pane-color, derive(-split-pane-color, -20%));
+}
+
+
+
+/* Hovered */
+#sidebar .list-cell:odd: filled: hover,
+.song-row:odd: filled: hover,
+#directory-view .directory-node: hover {
+	-fx-background-color: -hover-1-color;
+}
+#sidebar .list-cell:even: filled: hover,
+.song-row:even: filled: hover {
+	-fx-background-color: -hover-2-color;
+}
+
+
+
+/* Selected */
+#sidebar .list-cell:odd: filled: selected,
+.song-row:odd: filled: selected,
+#directory-view .directory-node: selected {
+	-fx-background-color: -selected-1-color;
+}
+#sidebar .list-cell:even: filled: selected,
+.song-row:even: filled: selected {
+	-fx-background-color: -selected-2-color;
+}
+#menu-bar > .container > .menu-button:hover,
+#menu-bar > .container > .menu-button:focused,
+#menu-bar > .container > .menu-button:showing,
+#menu-bar .menu-item:focused,
+.context-menu .menu-item:focused {
+	-fx-background-color: -menu-select-color;
+}
+
+
+
+/* Selected text */
+#sidebar .list-cell: filled: selected,
+#directory-view .directory-node: selected > .label,
+#track-list .table-row-cell:selected .table-cell {
+    -fx-text-fill: -selected-text-color;
+}
+.context-menu .menu-item:focused .label,
+#menu-bar > .container > .menu-button:hover > .label,
+#menu-bar > .container > .menu-button:focused > .label,
+#menu-bar > .container > .menu-button:showing  > .label,
+#menu-bar .menu-item:focused > .label {
+    -fx-text-fill: -menu-selected-text-color;
+}
+
+
+
+/* Playing text */
+.song-cell: playing {
+	-fx-text-fill: -playing-text-color;
+}
+#track-list .table-row-cell:selected .table-cell:playing {
+	-fx-text-fill: -selected-playing-text-color;
+}
+
+
+
+/* Menu */
+#menu-bar,
+#menu-bar .menu-item,
+.context-menu {
+	-fx-background-color: -menu-color;
+}
+
+
+
+/* History bar */
+#history-bar {
+	-fx-background-color: -history-bar-gradient;
+}
+
+
+
+/* Menu text */
+#menu-bar > .container > .menu-button > .label,
+#menu-bar .menu-item > .label,
+#menu-bar .check-menu-item,
+.context-menu .menu-item > .label {
+	-fx-text-fill: -menu-text-color;
+}
+.menu > .right-container > .arrow,
+.check-menu-item:checked > .left-container > .check,
+.radio-menu-item:checked > .left-container > .radio {
+    -fx-background-color: -menu-text-color;
+}
+
+
+
+/* Track list text */
+.song-cell {
+	-fx-text-fill: -track-list-text-color;
+}
+
+
+
+/* Track list header */
+.column-header-background, .table-view .filler {
+	-fx-background-color: -track-list-header-gradient;
+}
+
+
+
+/* Track list header text */
+.column-header .label {
+	-fx-text-fill: -track-list-header-text-color;
+}
+.table-view .arrow {
+    -fx-background-color: -track-list-header-text-color;
+}
+
+
+
+/* Track list column edit */
+#track-list .column-resize-line {
+	-fx-background-color: -track-list-edit-color;
+}
+#track-list .column-overlay {
+	-fx-background-color: -track-list-edit-color;
+}
+#track-list .column-drag-header {
+	-fx-background-color: -track-list-edit-color;
+}
+
+
+
+/* Slider thumb */
+#control-box .slider .thumb {
+	-slider-thumb-color-light: derive(-slider-thumb-color, 48%);
+	-slider-thumb-color-dark: derive(-slider-thumb-color, -11%);
+	-slider-thumb-color-semilight: derive(-slider-thumb-color, 26%);
+	-slider-thumb-color-semidark: derive(-slider-thumb-color, -7%);
+	
+	-top-color: -slider-thumb-color-semidark;
+	-bottom-color: -slider-thumb-color-semilight;
+	
+	-fx-background-color:
+		linear-gradient(to bottom, -top-color, -bottom-color),
+		radial-gradient(center 50% 0%, radius 100%,
+		rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2) 99%, transparent 99%);
+	-fx-background-radius: 50%, 50%;
+	-fx-background-insets: 0, 0.05em 0.275em 0.475em 0.275em;
+}
+
+#control-box .slider .thumb:hover {
+	-top-color: -slider-thumb-color;
+	-bottom-color: -slider-thumb-color-light;
+}
+
+#control-box .slider .thumb:pressed {
+	-top-color: -slider-thumb-color-dark;
+	-bottom-color: -slider-thumb-color;
+}
+
+
+
+/* Slider track */
+#control-box .slider .track {
+	-fx-pref-height: 0.4em;
+
+	-top-color: derive(-slider-track-color, -15%);
+	-inner-color: derive(-slider-track-color, 10%);
+	-bottom-color: derive(-slider-track-color, -13%);
+	
+	-fx-background-color: linear-gradient(to bottom, -top-color, -inner-color 75%, -bottom-color);
+}
+
+
+
+/* Scroll bar */
+.scroll-bar {
+	-fx-background-color: -scroll-bar-color;
+	-fx-border-color: -border-color;
+}
+
+
+
+/* Scroll bar thumb */
+.scroll-bar .thumb {
+	-fx-border-color: -border-color;
+}
+.scroll-bar:vertical .thumb {
+	-fx-background-color: linear-gradient(to right,
+		derive(-scroll-bar-thumb-color, -7%), -scroll-bar-thumb-color, derive(-scroll-bar-thumb-color, -7%));
+}
+.scroll-bar:horizontal .thumb {
+	-fx-background-color: linear-gradient(to bottom,
+		derive(-scroll-bar-thumb-color, -7%), -scroll-bar-thumb-color, derive(-scroll-bar-thumb-color, -7%));
+}
+.scroll-bar:vertical .thumb:hover {
+	-fx-background-color: linear-gradient(to right,
+		-scroll-bar-thumb-color, derive(-scroll-bar-thumb-color, 26%), -scroll-bar-thumb-color);
+}
+.scroll-bar:horizontal .thumb:hover {
+	-fx-background-color: linear-gradient(to bottom,
+		-scroll-bar-thumb-color, derive(-scroll-bar-thumb-color, 26%), -scroll-bar-thumb-color);
+}
+.scroll-bar:vertical .thumb:pressed {
+	-fx-background-color: linear-gradient(to right,
+		-scroll-bar-thumb-color, derive(-scroll-bar-thumb-color, -5%), -scroll-bar-thumb-color);
+}
+.scroll-bar:horizontal .thumb:pressed {
+	-fx-background-color: linear-gradient(to bottom,
+		-scroll-bar-thumb-color, derive(-scroll-bar-thumb-color, -5%), -scroll-bar-thumb-color);
+}
+
+
+
+/* Scroll bar track */
+.scroll-bar .track {
+	-fx-border-color: -border-color;
+	-inner-color: derive(-scroll-bar-track-color, 4%);
+	-outer-color: derive(-scroll-bar-track-color, -8%);
+}
+.scroll-bar:vertical .track {
+	-fx-background-color: linear-gradient(to right, -outer-color, -inner-color, -outer-color);
+}
+.scroll-bar:horizontal .track {
+	-fx-background-color: linear-gradient(to bottom, -outer-color, -inner-color, -outer-color);
+}
+
+
+
+/* Scroll bar button */
+.scroll-bar .increment-button, .scroll-bar .decrement-button {
+	-fx-background-color: -scroll-bar-color;
+}
+.scroll-bar .increment-button:hover, .scroll-bar .decrement-button:hover {
+	-fx-background-color: derive(-scroll-bar-color, 26%);
+}
+.scroll-bar .increment-button:pressed, .scroll-bar .decrement-button:pressed {
+	-fx-background-color: derive(-scroll-bar-color, -5%);
+}
+
+
+
+/* Scroll bar arrow */
+.scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
+	-fx-background-color: -scroll-bar-arrow-color;
+}
+
+
+
+/* Scroll pane corner */
+.corner {
+	-fx-background-color: -corner-color;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

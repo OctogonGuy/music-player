@@ -1,0 +1,22 @@
+.root {
+	-cell-1-color: #fcf7f1;
+	-cell-2-color: #f8f2df;
+	-slider-thumb-color: #e9c914;
+	-foreground-color: #f0d897;
+	-background-color: #f0e9d2;
+	-history-bar-color: #fcf7f1;
+	-track-list-edit-color: #e9c914;
+	-text-color: #5e4910;
+	-selected-text-color: #f8f5e7;
+	-playing-text-color: #a69902;
+	-selected-playing-text-color: #fef794;
+	-hover-color: #d8c997;
+	-select-color: #8b8546;
+	-control-button-color-top: #cca90f;
+	-control-button-color-bottom: #eaff70;
+	-control-button-hover-color-top: #da9a25;
+	-control-button-hover-color-bottom: #fff065;
+	-history-button-color-top: #cca45b;
+	-history-button-color-bottom: #eedfb5;
+	-directory-node-graphic-color: #f5d63d;
+}

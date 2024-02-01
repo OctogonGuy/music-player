@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.input.KeyCodeCombination?>
+
+<MenuBar id="menu-bar" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tech.octopusdragon.musicplayer.application.scenes.MenuBarController">
+  <menus>
+    <Menu mnemonicParsing="false" text="File">
+      <items>
+            <MenuItem mnemonicParsing="false" onAction="#selectRootFolder" text="Select Root Folder" />
+            <MenuItem mnemonicParsing="false" text="Reload Library" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+        <MenuItem mnemonicParsing="false" onAction="#exit" text="Exit" />
+      </items>
+    </Menu>
+      <Menu mnemonicParsing="false" text="Play">
+        <items>
+          <MenuItem mnemonicParsing="false" onAction="#playPause" text="Play/Pause">
+               <accelerator>
+                  <KeyCodeCombination alt="UP" code="P" control="UP" meta="UP" shift="UP" shortcut="UP" />
+               </accelerator></MenuItem>
+            <MenuItem mnemonicParsing="false" onAction="#restart" text="Restart">
+               <accelerator>
+                  <KeyCodeCombination alt="UP" code="R" control="UP" meta="UP" shift="UP" shortcut="UP" />
+               </accelerator></MenuItem>
+            <MenuItem mnemonicParsing="false" onAction="#stop" text="Stop">
+               <accelerator>
+                  <KeyCodeCombination alt="UP" code="S" control="UP" meta="UP" shift="UP" shortcut="UP" />
+               </accelerator></MenuItem>
+            <Menu mnemonicParsing="false" text="Playback Rate">
+               <items>
+                  <RadioMenuItem fx:id="rateQuarterMenuItem" mnemonicParsing="false" onAction="#rateQuarter" text="0.25x">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="rateToggleGroup" />
+                     </toggleGroup>
+                  </RadioMenuItem>
+                  <RadioMenuItem fx:id="rateHalfMenuItem" mnemonicParsing="false" onAction="#rateHalf" text="0.5x" toggleGroup="$rateToggleGroup" />
+                  <RadioMenuItem fx:id="rateNormalMenuItem" mnemonicParsing="false" onAction="#rateNormal" selected="true" text="1.0x" toggleGroup="$rateToggleGroup" />
+                  <RadioMenuItem fx:id="rateDoubleMenuItem" mnemonicParsing="false" onAction="#rateDouble" text="2.0x" toggleGroup="$rateToggleGroup" />
+                  <RadioMenuItem fx:id="rateQuadrupleMenuItem" mnemonicParsing="false" onAction="#rateQuadruple" text="4.0x" toggleGroup="$rateToggleGroup" />
+               </items>
+            </Menu>
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" onAction="#previous" text="Previous">
+               <accelerator>
+                  <KeyCodeCombination alt="UP" code="Z" control="UP" meta="UP" shift="UP" shortcut="UP" />
+               </accelerator></MenuItem>
+            <MenuItem mnemonicParsing="false" onAction="#next" text="Next">
+               <accelerator>
+                  <KeyCodeCombination alt="UP" code="X" control="UP" meta="UP" shift="UP" shortcut="UP" />
+               </accelerator></MenuItem>
+            <MenuItem mnemonicParsing="false" onAction="#rewind" text="Rewind">
+               <accelerator>
+                  <KeyCodeCombination alt="UP" code="COMMA" control="UP" meta="UP" shift="UP" shortcut="UP" />
+               </accelerator></MenuItem>
+            <MenuItem mnemonicParsing="false" onAction="#fastForward" text="Fast Forward">
+               <accelerator>
+                  <KeyCodeCombination alt="UP" code="PERIOD" control="UP" meta="UP" shift="UP" shortcut="UP" />
+               </accelerator></MenuItem>
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <CheckMenuItem fx:id="shuffleMenuItem" mnemonicParsing="false" text="Shuffle" />
+            <CheckMenuItem fx:id="repeatMenuItem" mnemonicParsing="false" text="Repeat" />
+            <CheckMenuItem fx:id="repeatSingleMenuItem" mnemonicParsing="false" text="Repeat Single" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <Menu mnemonicParsing="false" text="Volume">
+              <items>
+                  <MenuItem mnemonicParsing="false" onAction="#volumeUp" text="Volume Up">
+		               <accelerator>
+		                  <KeyCodeCombination alt="UP" code="EQUALS" control="UP" meta="UP" shift="UP" shortcut="UP" />
+		               </accelerator></MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#volumeDown" text="Volume Down">
+		               <accelerator>
+		                  <KeyCodeCombination alt="UP" code="MINUS" control="UP" meta="UP" shift="UP" shortcut="UP" />
+		               </accelerator></MenuItem>
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Balance">
+               <items>
+                  <RadioMenuItem fx:id="balanceFullLeftMenuItem" mnemonicParsing="false" onAction="#balance100Left" text="100% Left">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="balanceToggleGroup" />
+                     </toggleGroup>
+                  </RadioMenuItem>
+                  <RadioMenuItem fx:id="balanceHalfLeftMenuItem" mnemonicParsing="false" onAction="#balance50Left" text="50% Left" toggleGroup="$balanceToggleGroup" />
+                  <RadioMenuItem fx:id="balanceCenterMenuItem" mnemonicParsing="false" onAction="#balanceCenter" selected="true" text="Center" toggleGroup="$balanceToggleGroup" />
+                  <RadioMenuItem fx:id="balanceHalfRightMenuItem" mnemonicParsing="false" onAction="#balance50Right" text="50% Right" toggleGroup="$balanceToggleGroup" />
+                  <RadioMenuItem fx:id="balanceFullRightMenuItem" mnemonicParsing="false" onAction="#balance100Right" text="100% Right" toggleGroup="$balanceToggleGroup" />
+               </items>
+            </Menu>
+            <CheckMenuItem fx:id="muteMenuItem" mnemonicParsing="false" text="Mute">
+               <accelerator>
+                  <KeyCodeCombination alt="UP" code="M" control="UP" meta="UP" shift="UP" shortcut="UP" />
+               </accelerator></CheckMenuItem>
+        </items>
+      </Menu>
+      <Menu mnemonicParsing="false" text="View">
+         <items>
+            <RadioMenuItem fx:id="explorerMenuItem" mnemonicParsing="false" onAction="#switchToExplorerView" text="Explorer" />
+            <RadioMenuItem fx:id="currentlyPlayingMenuItem" mnemonicParsing="false" onAction="#switchToCurrentlyPlayingView" text="Now Playing" />
+         </items>
+      </Menu>
+      <Menu mnemonicParsing="false" text="Settings">
+        <items>
+            <Menu fx:id="uiSizeMenu" mnemonicParsing="false" text="UI Size" />
+            <Menu fx:id="themeMenu" mnemonicParsing="false" text="Theme" />
+        </items>
+      </Menu>
+  </menus>
+</MenuBar>

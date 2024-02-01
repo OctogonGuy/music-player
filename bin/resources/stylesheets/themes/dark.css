@@ -1,0 +1,31 @@
+.root {
+	-cell-1-color: #4d4d4d;
+	-cell-2-color: #5e5e5e;
+	-slider-thumb-color: #101010;
+	-scroll-bar-track-color: #3d3d3d;
+	-scroll-bar-color: #262626;
+	-scroll-bar-arrow-color: #111111;
+	-border-color: #111111;
+	-foreground-color: #424242;
+	-background-color: #242424;
+	-menu-color: #222222;
+	-history-bar-color: #4d4d4d;
+	-track-list-header-color: #222222;
+	-track-list-edit-color: #242424;
+	-text-color: #ebebeb;
+	-selected-text-color: #0d0d0d;
+	-playing-text-color: #a0a0a0;
+	-selected-playing-text-color: #737373;
+	-hover-color: #797979;
+	-select-color: #bbbbbb;
+	-control-button-color-top: #2e2e2e;
+	-control-button-color-bottom: #636363;
+	-control-button-hover-color-top: #4d4d4d;
+	-control-button-hover-color-bottom: #8a8a8a;
+	-history-button-color-top: #2e2e2e;
+	-history-button-color-bottom: #636363;
+	-directory-node-graphic-color: #181818;
+
+	-control-button-text-color: #d4d4d4;
+	-track-list-header-text-color: -text-color;
+}

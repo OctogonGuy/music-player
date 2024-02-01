@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+
+<fx:root type="GridPane" id="album-info-box" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <rowConstraints>
+      <RowConstraints percentHeight="25.0" vgrow="SOMETIMES" />
+      <RowConstraints percentHeight="25.0" vgrow="SOMETIMES" />
+      <RowConstraints percentHeight="25.0" vgrow="SOMETIMES" />
+      <RowConstraints percentHeight="25.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <children>
+      <StackPane fx:id="imagePane" styleClass="graphic-container" pickOnBounds="true" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.rowSpan="2147483647">
+         <children>
+     		<ImageView fx:id="albumImageView" preserveRatio="true" GridPane.rowSpan="2147483647" />
+         </children>
+      </StackPane>
+      <Label fx:id="albumLabel" text="Album" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+      <Label fx:id="albumArtistLabel" text="Album Artist" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Label fx:id="genreLabel" text="Genre" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Label fx:id="yearLabel" text="Year" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+   </children>
+</fx:root>

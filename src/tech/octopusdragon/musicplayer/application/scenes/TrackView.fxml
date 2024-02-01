@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+
+<?import tech.octopusdragon.musicplayer.application.components.AlbumInfoBox?>
+<?import tech.octopusdragon.musicplayer.application.components.TrackList?>
+
+<fx:root type="VBox" id="track-view" alignment="TOP_CENTER" minWidth="0.0" minHeight="0.0" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<AlbumInfoBox fx:id="albumInfoBox" maxWidth="-Infinity" ></AlbumInfoBox>
+		<TrackList fx:id="trackList" VBox.vgrow="SOMETIMES" ></TrackList>
+	</children>
+</fx:root>
+

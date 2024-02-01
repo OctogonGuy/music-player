@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<fx:root type="BorderPane" minHeight="0.0" xmlns:fx="http://javafx.com/fxml/1">
+	<top>
+		<fx:include source="HistoryBar.fxml" />
+	</top>
+	<center>
+		<SplitPane>
+			<items>
+			   <fx:include source="Sidebar.fxml" SplitPane.resizableWithParent="false" />
+			   <fx:include source="Navigator.fxml" SplitPane.resizableWithParent="true" />
+			</items>
+		</SplitPane>
+	</center>
+</fx:root>
+

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TableView?>
+<?import tech.octopusdragon.musicplayer.components.DirectoryGrid?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.layout.Region?>
+
+<fx:root xmlns:fx="http://javafx.com/fxml/1" type="VBox" minHeight="0.0" minWidth="0.0">
+	<children>
+		<TableView fx:id="header" minHeight="-1" prefHeight="-1" maxHeight="-1" >
+		    <placeholder>
+		        <Region minHeight="0.0" prefHeight="0.0" maxHeight="0.0" minWidth="0.0" prefWidth="0.0" maxWidth="0.0" />
+		    </placeholder>
+			<columns>
+			</columns>
+		</TableView>
+		<DirectoryGrid fx:id="directoryGrid" VBox.vgrow="SOMETIMES" ></DirectoryGrid>
+	</children>
+</fx:root>
+

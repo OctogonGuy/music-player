@@ -603,7 +603,7 @@ public class MusicPlayerApplication extends Application {
 	
 	/**
 	 * Goes to the given folder as either a directory or tracks list, depending
-	 * on which is more appropraite, and updates the history
+	 * on which is more appropriate, and updates the history
 	 * @param directory
 	 */
 	public static void goForward(Directory directory) {
@@ -785,7 +785,7 @@ public class MusicPlayerApplication extends Application {
 	
 	/**
 	 * Sets the current speed of the audio playback
-	 * @param The rate to set
+	 * @param rate The rate to set
 	 */
 	public static void setRateEnum(Rate rate) {
 		rateEnumProperty.set(rate);
@@ -810,7 +810,7 @@ public class MusicPlayerApplication extends Application {
 	
 	/**
 	 * Sets the current left/right balance of the music player
-	 * @param The balance to set
+	 * @param balance The balance to set
 	 */
 	public static void setBalanceEnum(Balance balance) {
 		balanceEnumProperty.set(balance);

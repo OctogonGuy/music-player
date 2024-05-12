@@ -277,7 +277,7 @@ public class DirectoryGrid extends ScrollPane {
 			if (curDirectory.getType() == DirectoryType.ALBUM_COLLECTION_DIRECTORY) {
 				DirectoryNode addAlbumCollectionNode = putDirectoryNode(index, curDirectory);
 				Platform.runLater(() -> {
-					addAlbumCollectionNode.setMask(new Image(Resource.PLUS_IMAGE.getPath()));
+					addAlbumCollectionNode.setMask(new Image(Resource.PLUS_IMAGE.getResourceAsStream()));
 					// Remove context pane
 					addAlbumCollectionNode.setOnContextMenuRequested(null);
 					addAlbumCollectionNode.setMaxHeight(Region.USE_PREF_SIZE);
@@ -291,7 +291,7 @@ public class DirectoryGrid extends ScrollPane {
 			if (curDirectory.getType() == DirectoryType.ALBUM_COLLECTION) {
 				DirectoryNode addAlbumCollectionAlbumNode = putDirectoryNode(index, curDirectory);
 				Platform.runLater(() -> {
-					addAlbumCollectionAlbumNode.setMask(new Image(Resource.PLUS_IMAGE.getPath()));
+					addAlbumCollectionAlbumNode.setMask(new Image(Resource.PLUS_IMAGE.getResourceAsStream()));
 					// Remove context pane
 					addAlbumCollectionAlbumNode.setOnContextMenuRequested(null);
 					addAlbumCollectionAlbumNode.setMaxHeight(Region.USE_PREF_SIZE);

@@ -39,7 +39,11 @@ public enum Resource {
 	MEDIUM_SMALL_STYLESHEET("/stylesheets/ui_sizes/medium_small.css"),
 	MEDIUM_STYLESHEET("/stylesheets/ui_sizes/medium.css"),
 	MEDIUM_LARGE_STYLESHEET("/stylesheets/ui_sizes/medium_large.css"),
-	LARGE_STYLESHEET("/stylesheets/ui_sizes/large.css");
+	LARGE_STYLESHEET("/stylesheets/ui_sizes/large.css"),
+
+	JUA("/fonts/Jua-Regular.ttf"),
+	KOSUGI_MARU("/fonts/KosugiMaru-Regular.ttf"),
+	VARELA_ROUND("/fonts/VarelaRound-Regular.ttf");
 	
 	// --- Instance variables ---
 	private String path;	// The path to the resource file

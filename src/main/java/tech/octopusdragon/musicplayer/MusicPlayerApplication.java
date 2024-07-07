@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import javafx.scene.text.Font;
 import tech.octopusdragon.musicplayer.model.Directory;
 import tech.octopusdragon.musicplayer.model.MusicPlayer;
 import tech.octopusdragon.musicplayer.model.SongDirectory;
@@ -277,6 +278,11 @@ public class MusicPlayerApplication extends Application {
 			rootFolderPath = DEFAULT_ROOT_FOLDER_PATH;
 			selectRootFolder();
 		}
+
+		// Load fonts
+		Font.loadFont(Resource.JUA.getResource().toExternalForm(), 0);
+		Font.loadFont(Resource.KOSUGI_MARU.getResource().toExternalForm(), 0);
+		Font.loadFont(Resource.VARELA_ROUND.getResource().toExternalForm(), 0);
 		
 		// Get the root node for the scene from an FXML file
 		root = getFXMLRoot(ROOT_FXML_PATH);

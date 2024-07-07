@@ -62,7 +62,7 @@
 /* General */
 
 .root * {
-	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-family: "Varela Round";
 	-fx-text-fill: -text-color;
 }
 

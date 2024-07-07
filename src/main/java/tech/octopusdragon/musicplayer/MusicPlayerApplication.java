@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import javafx.beans.property.*;
 import javafx.scene.text.Font;
 import tech.octopusdragon.musicplayer.model.Directory;
 import tech.octopusdragon.musicplayer.model.MusicPlayer;
@@ -23,14 +24,6 @@ import tech.octopusdragon.musicplayer.window.LibraryLocationDialog;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -100,6 +93,8 @@ public class MusicPlayerApplication extends Application {
 	// A string property showing the currently loading song, etc. so that other
 	// components may listen to it
 	private static StringProperty updateMessageProperty;
+	// The progress (0.0 to 1.0) of library reload
+	private static DoubleProperty reloadProgressProperty;
 	
 	@Override
 	public void init() {
@@ -224,6 +219,7 @@ public class MusicPlayerApplication extends Application {
 		});
 		reloadingProperty = new SimpleBooleanProperty(false);
 		updateMessageProperty = new SimpleStringProperty();
+		reloadProgressProperty = new SimpleDoubleProperty(0.0);
 	}
 	
 	@Override
@@ -704,12 +700,6 @@ public class MusicPlayerApplication extends Application {
 		historyTrackView.add(true);
 		historyIndexProperty.set(history.size() - 1);
 	}
-
-
-
-	public static void updateUI(Song song) {
-
-	}
 	
 	
 	
@@ -908,6 +898,29 @@ public class MusicPlayerApplication extends Application {
 	public static final void setUpdateMessage(
 			final String currentlyLoadingSong) {
 		updateMessageProperty().set(currentlyLoadingSong);
+	}
+
+
+	/**
+	 * @return The reload progress property
+	 */
+	public static final DoubleProperty reloadProgressProperty() {
+		return reloadProgressProperty;
+	}
+
+	/**
+	 * @return The progress of the reload
+	 */
+	public static final double getReloadProgressProperty() {
+		return reloadProgressProperty.get();
+	}
+
+	/**
+	 * Sets the progress of the reload
+	 * @param val The progress (0.0 to 1.0)
+	 */
+	public static final void setReloadProgressProperty(double val) {
+		reloadProgressProperty.set(val);
 	}
 
 }

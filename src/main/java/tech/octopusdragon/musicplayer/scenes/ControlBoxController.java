@@ -1,5 +1,6 @@
 package tech.octopusdragon.musicplayer.scenes;
 
+import javafx.scene.control.ProgressBar;
 import tech.octopusdragon.musicplayer.MusicPlayerApplication;
 import tech.octopusdragon.musicplayer.components.ManualToggleButton;
 import tech.octopusdragon.musicplayer.model.MusicPlayer;
@@ -51,6 +52,7 @@ public class ControlBoxController {
 	@FXML private Label loadingSongLabel;
 	@FXML private Button reloadButton;
 	@FXML private Button folderButton;
+	@FXML private ProgressBar loadingProgressBar;
 	
 	@FXML
 	private void initialize() {
@@ -96,6 +98,9 @@ public class ControlBoxController {
 			else
 				return "🔁";
 		}, player.repeatProperty(), player.repeatSingleProperty()));
+
+		loadingProgressBar.visibleProperty().bind(MusicPlayerApplication.reloadingProperty());
+		loadingProgressBar.progressProperty().bind(MusicPlayerApplication.reloadProgressProperty());
 		
 		
 		// Set the display to also update whenever the song changes

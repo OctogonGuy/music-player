@@ -39,6 +39,8 @@ public class RootDirectories implements Serializable {
 	private Folder folderDirectory;			// Root folder directory
 	private Directory playlistDirectory;	// Root playlist directory
 	private AlbumCollectionDirectory albumCollectionDirectory;	// Root ALCO dir
+	private int numItems;						// Number of items to load
+	private int itemsLoaded;					// Number of items loaded
 	
 	/**
 	 * @return the songs
@@ -153,6 +155,28 @@ public class RootDirectories implements Serializable {
 	public Directory defaultDirectory() {
 		return getDirectory(DEFAULT_DIRECTORY_TYPE);
 	}
+
+	/**
+	 * Counts the number of files in the directory recursively
+	 * @param dirPath The path of the directory to search
+	 */
+	private void countFiles(String dirPath) {
+		List<String> musicFileExtensions = Arrays.asList(Util.MUSIC_FILE_EXTENTIONS);
+		List<String> playlistFileExtensions = Arrays.asList(Util.PLAYLIST_FILE_EXTENTIONS);
+		File dir = new File(dirPath);
+		File[] files = dir.listFiles();
+		if (files != null)
+		for (int i = 0; i < files.length; i++) {
+			File file = files[i];
+			if (file.isDirectory()) {
+				 countFiles(file.getAbsolutePath());
+			}
+			else if (musicFileExtensions.contains(Util.getFileExtension(file.getName()))
+			|| playlistFileExtensions.contains(Util.getFileExtension(file.getName()))) {
+				numItems++;
+			}
+		}
+	}
 	
 	/**
 	 * Assigns all of this object's variables with data pulled from the user's
@@ -160,6 +184,12 @@ public class RootDirectories implements Serializable {
 	 * @param directoryPath The path of the directory to pull data from
 	 */
 	public void pullData(String directoryPath) {
+		// Count number of files to load
+		MusicPlayerApplication.setUpdateMessage("Indexing library");
+		numItems = 0;
+		itemsLoaded = 0;
+		countFiles(directoryPath);
+
 		MusicPlayerApplication.setUpdateMessage("Loading folders");
 		folderDirectory = getFolderDirectory(directoryPath);
 		
@@ -223,9 +253,10 @@ public class RootDirectories implements Serializable {
 				// If a music file, add it
 				else if (Arrays.asList(Util.MUSIC_FILE_EXTENTIONS).contains(Util.getFileExtension(file))) {
 					MusicPlayerApplication.setUpdateMessage(file.getPath());
+					itemsLoaded++;
+					MusicPlayerApplication.setReloadProgressProperty(1.0 * itemsLoaded / numItems);
 					Song newSong = new Song(file);
 					songList.add(newSong);
-					MusicPlayerApplication.updateUI(newSong);
 				}
 			}
 		}
@@ -452,6 +483,8 @@ public class RootDirectories implements Serializable {
 			// Create a new playlist object
 			String playlistName = playlistFile.getName().replace(Util.getFileExtension(playlistFile), "");
 			MusicPlayerApplication.setUpdateMessage(playlistFile.getPath());
+			itemsLoaded++;
+			MusicPlayerApplication.setReloadProgressProperty(1.0 * itemsLoaded / numItems);
 			Playlist newPlaylist = new Playlist(playlistName, rootDirectory);
 			rootDirectory.addDirectory(newPlaylist);
 			

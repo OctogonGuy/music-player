@@ -158,7 +158,7 @@ public class Directory implements Serializable, Comparable<Directory> {
 	
 	/**
 	 * Adds multiple songs to this directory's list of songs
-	 * @param song The song to add
+	 * @param songCollection The songs to add
 	 */
 	public void addSongs(Collection<Song> songCollection) {
 		songs.addAll(songCollection);

@@ -52,7 +52,6 @@ public class TrackList extends TableView<Song> {
 	
 	/**
 	 * Instantiates a new track navigator starting at the default directory.
-	 * @param app The music player application
 	 */
 	public TrackList() {
 		super();

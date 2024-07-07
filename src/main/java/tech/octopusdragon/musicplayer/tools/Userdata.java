@@ -314,7 +314,7 @@ public class Userdata {
 	
 	/**
 	 * Loads and returns an album collection from the album collection directory
-	 * @param filename The filename of the album collection
+	 * @param file The file of the album collection
 	 * @return The album collection
 	 */
 	private static AlbumCollection loadAlbumCollection(File file) {
@@ -506,7 +506,7 @@ public class Userdata {
 	
 	/**
 	 * Reads and saves the user's music library
-	 * @param The directory of the user's music library
+	 * @param directoryPath The directory of the user's music library
 	 */
 	public static void scanMusicLibrary(String directoryPath) {
 			musicLibrary = new RootDirectories();

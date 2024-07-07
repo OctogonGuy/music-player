@@ -183,7 +183,7 @@ public class DirectoryNodeContextMenu extends ContextMenu {
 	
 	/**
 	 * Moves the album one step up in its album collection
-	 * @param albumCollection The album collection to move
+	 * @param album The album to move
 	 */
 	private void moveUpAlbumCollectionAlbum(Album album) {
 		AlbumCollection albumCollection = (AlbumCollection)album.getParent();
@@ -203,7 +203,7 @@ public class DirectoryNodeContextMenu extends ContextMenu {
 	
 	/**
 	 * Moves the album one step down in its album collection
-	 * @param albumCollection The album collection to move
+	 * @param album The album to move
 	 */
 	private void moveDownAlbumCollectionAlbum(Album album) {
 		AlbumCollection albumCollection = (AlbumCollection)album.getParent();
@@ -223,7 +223,7 @@ public class DirectoryNodeContextMenu extends ContextMenu {
 	
 	/**
 	 * Moves the album all the way up in its album collection
-	 * @param albumCollection The album collection to move
+	 * @param album The album to move
 	 */
 	private void moveToTopAlbumCollectionAlbum(Album album) {
 		AlbumCollection albumCollection = (AlbumCollection)album.getParent();
@@ -243,7 +243,7 @@ public class DirectoryNodeContextMenu extends ContextMenu {
 	
 	/**
 	 * Moves the album all the way down in its album collection
-	 * @param albumCollection The album collection to move
+	 * @param album The album to move
 	 */
 	private void moveToBottomAlbumCollectionAlbum(Album album) {
 		AlbumCollection albumCollection = (AlbumCollection)album.getParent();

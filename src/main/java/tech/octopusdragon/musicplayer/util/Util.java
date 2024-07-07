@@ -103,7 +103,7 @@ public class Util {
 	
 	/**
 	 * Returns the file extension of the given file path.	
-	 * @param file The file.
+	 * @param path The file path.
 	 * @return The file extension starting with the dot.
 	 */
 	public static String getFileExtension(String path) {

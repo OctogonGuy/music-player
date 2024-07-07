@@ -225,6 +225,7 @@ public class RootDirectories implements Serializable {
 					MusicPlayerApplication.setUpdateMessage(file.getPath());
 					Song newSong = new Song(file);
 					songList.add(newSong);
+					MusicPlayerApplication.updateUI(newSong);
 				}
 			}
 		}
@@ -493,7 +494,7 @@ public class RootDirectories implements Serializable {
 	
 	/**
 	 * Returns a directory with the playlists found in the given folder.
-	 * @param rootFolder The path of the root folder as a string
+	 * @param rootFolderPath The path of the root folder as a string
 	 * @return A directory with playlists
 	 */
 	private Directory getPlaylistDirectory(String rootFolderPath) {

@@ -457,7 +457,7 @@ public class MusicPlayer {
 	
 	/**
 	 * Lists the songs in a new directory.
-	 * @param path The new directory.
+	 * @param directory The new directory.
 	 * @param recursive Whether to add songs in subdirectories
 	 */
 	public void newDirectory(Directory directory, boolean recursive) {
@@ -783,7 +783,7 @@ public class MusicPlayer {
 
 	/**
 	 * Sets whether the player is on repeat single
-	 * @param repeat Whether the player is on repeat single
+	 * @param repeatSingle Whether the player is on repeat single
 	 */
 	public void setRepeatSingle(boolean repeatSingle) {
 		this.repeatSingleProperty().set(repeatSingle);
@@ -833,7 +833,7 @@ public class MusicPlayer {
 
 	/**
 	 * Sets the left/right balance
-	 * @param rate The left/right balance (-1.0 - 1.0)
+	 * @param balance The left/right balance (-1.0 - 1.0)
 	 */
 	public void setBalance(double balance) {
 		this.balanceProperty().set(balance);

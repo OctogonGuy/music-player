@@ -8,6 +8,7 @@ import java.util.Optional;
 import javafx.scene.text.Font;
 import tech.octopusdragon.musicplayer.model.Directory;
 import tech.octopusdragon.musicplayer.model.MusicPlayer;
+import tech.octopusdragon.musicplayer.model.Song;
 import tech.octopusdragon.musicplayer.model.SongDirectory;
 import tech.octopusdragon.musicplayer.tools.Balance;
 import tech.octopusdragon.musicplayer.tools.NavigatorView;
@@ -702,6 +703,12 @@ public class MusicPlayerApplication extends Application {
 		history.add(directory);
 		historyTrackView.add(true);
 		historyIndexProperty.set(history.size() - 1);
+	}
+
+
+
+	public static void updateUI(Song song) {
+
 	}
 	
 	

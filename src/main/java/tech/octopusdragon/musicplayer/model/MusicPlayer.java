@@ -242,7 +242,7 @@ public class MusicPlayer {
 		
 		// Initialize the new media
 		curSong.set(songs.get(newIndex));
-		media = new Media(curSong.getValue().getURI());
+		media = new Media(curSong.getValue().getURI().toString());
 		playerProperty.set(new MediaPlayer(media));
 		playerProperty.get().setOnEndOfMedia(new Runnable() {
 			@Override

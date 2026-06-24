@@ -2,6 +2,7 @@ package tech.octopusdragon.musicplayer.model;
 
 import java.util.Comparator;
 
+import javafx.scene.media.MediaException;
 import tech.octopusdragon.musicplayer.util.Util;
 
 import javafx.beans.property.BooleanProperty;
@@ -242,8 +243,24 @@ public class MusicPlayer {
 		
 		// Initialize the new media
 		curSong.set(songs.get(newIndex));
+		System.out.println("Loading media: " + curSong.getValue().getURI());
 		media = new Media(curSong.getValue().getURI().toString());
-		playerProperty.set(new MediaPlayer(media));
+		try {
+			playerProperty.set(new MediaPlayer(media));
+		}
+		catch (MediaException | IllegalArgumentException exception) {
+			System.err.println("Failed to create media player for: " + curSong.getValue().getURI());
+			System.err.println(exception);
+			System.err.println("Message: " + exception.getMessage());
+			System.err.println("Cause: " + exception.getCause());
+			exception.printStackTrace();
+
+			//media = null;
+			//playerProperty.set(null);
+			//loaded.set(false);
+			//playing.set(false);
+			//index.set(-1);
+		}
 		playerProperty.get().setOnEndOfMedia(new Runnable() {
 			@Override
 			public void run() {

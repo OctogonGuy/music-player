@@ -3,7 +3,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.TableView?>
 <?import tech.octopusdragon.musicplayer.components.DirectoryGrid?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.layout.Region?>
 
 <fx:root xmlns:fx="http://javafx.com/fxml/1" type="VBox" minHeight="0.0" minWidth="0.0">

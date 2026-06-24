@@ -9,7 +9,7 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.input.KeyCodeCombination?>
 
-<MenuBar id="menu-bar" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tech.octopusdragon.musicplayer.scenes.MenuBarController">
+<MenuBar id="menu-bar" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tech.octopusdragon.musicplayer.scenes.MenuBarController">
   <menus>
     <Menu mnemonicParsing="false" text="File">
       <items>

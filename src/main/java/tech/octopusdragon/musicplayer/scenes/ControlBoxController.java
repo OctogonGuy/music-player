@@ -17,7 +17,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.MediaPlayer.Status;
 import javafx.util.Duration;
 
 public class ControlBoxController {
@@ -104,7 +103,7 @@ public class ControlBoxController {
 		
 		
 		// Set the display to also update whenever the song changes
-		player.playerProperty().addListener((observable, oldValue, newValue) -> {
+		player.getCurSong().addListener((observable, oldValue, newValue) -> {
 			
 			// If no media is loadedProperty(), reset the display.
 			if (newValue == null) {
@@ -122,23 +121,21 @@ public class ControlBoxController {
 					}
 				});
 			} else {
-				
-				// Update the new media's information
-				newValue.setOnReady(new Runnable() {
-					@Override
-					public void run() {
-						displayInfo();
-						updateTime();
-						updateProgress();
-					}
-				});
-				newValue.currentTimeProperty().addListener(
-						(timeObservable, timeOldValue, timeNewValue) -> {
-					if (newValue.getStatus() == Status.PAUSED) return;
-					updateTime();
-					updateProgress();
-				});
+				displayInfo();
+				updateTime();
+				updateProgress();
 			}
+		});
+
+		player.durationProperty().addListener((observable, oldValue, newValue) -> {
+			displayInfo();
+			updateTime();
+			updateProgress();
+		});
+
+		player.currentTimeProperty().addListener((observable, oldValue, newValue) -> {
+			updateTime();
+			updateProgress();
 		});
 		
 		// If no media is loadedProperty(), reset the display.
@@ -180,11 +177,11 @@ public class ControlBoxController {
 		if (!player.isLoaded()) return;
 		
 		if (player.isPlaying()) {
-			player.getPlayer().pause();
+			player.getPlayer().controls().pause();
 		}
 		
 		player.seek(((Slider)event.getSource()).getValue() *
-				player.getMedia().getDuration().toMillis());
+				player.getDuration());
 		
 		updateTime();
 	}
@@ -194,7 +191,7 @@ public class ControlBoxController {
 		if (!player.isLoaded()) return;
 		
 		player.seek(((Slider)event.getSource()).getValue() *
-				player.getMedia().getDuration().toMillis());
+				player.getDuration());
 		
 		updateTime();
 	}
@@ -204,11 +201,11 @@ public class ControlBoxController {
 		if (!player.isLoaded()) return;
 		
 		if (((Slider)event.getSource()).getValue() == 1) {
-			player.getPlayer().seek(player.getMedia().getDuration().add(Duration.millis(1).negate()));
+			player.seek(player.getDuration() - 1);
 		}
 		
 		if (player.isPlaying()) {
-			player.getPlayer().play();
+			player.getPlayer().controls().play();
 		}
 	}
 	
@@ -229,7 +226,7 @@ public class ControlBoxController {
 	
 	@FXML
 	private void previous(ActionEvent event) {
-		if (player.getPlayer().getCurrentTime().toMillis() < TIME_BEFORE_PREVIOUS) {
+		if (player.getCurrentTime() < TIME_BEFORE_PREVIOUS) {
 			player.previous();
 		}
 		else {
@@ -293,9 +290,9 @@ public class ControlBoxController {
 		// If denominator label is in duration mode, display the duration
 		if (timeDenominatorMode == TimeDenominatorMode.DURATION) {
 			double durationMins =
-					player.getMedia().getDuration().toMinutes();
+					player.getDuration() / 60000;
 			double durationSecs =
-					player.getMedia().getDuration().toSeconds() % 60;
+					(player.getDuration() / 1000) % 60;
 			denominatorLabel.setText(String.format("%02d:%02d",
 											(int)durationMins,
 											(int)durationSecs));
@@ -312,9 +309,9 @@ public class ControlBoxController {
 
 		// Update the current time
 		double curTimeMins =
-				player.getPlayer().getCurrentTime().toMinutes();
+				player.getCurrentTime() / 60000;
 		double curTimeSecs =
-				player.getPlayer().getCurrentTime().toSeconds() % 60;
+				(player.getCurrentTime() / 1000) % 60;
 		
 		curTimeLabel.setText(String.format("%02d:%02d",
 										(int)curTimeMins,
@@ -323,11 +320,9 @@ public class ControlBoxController {
 		// If denominator label is in time left mode, update the time left
 		if (timeDenominatorMode == TimeDenominatorMode.TIME_LEFT) {
 			double timeLeftMins =
-					player.getMedia().getDuration().toMinutes() -
-					player.getPlayer().getCurrentTime().toMinutes();
+					(player.getDuration() - player.getCurrentTime()) / 60000;
 			double timeLeftSecs =
-					(player.getMedia().getDuration().toSeconds() -
-					player.getPlayer().getCurrentTime().toSeconds()) % 60;
+					((player.getDuration() - player.getCurrentTime()) / 1000) % 60;
 			
 			denominatorLabel.setText(String.format("-%02d:%02d",
 											(int)(timeLeftMins),
@@ -346,11 +341,11 @@ public class ControlBoxController {
 		
 		// Get the current time
 		double curTimeMillis =
-				player.getPlayer().getCurrentTime().toMillis();
+				player.getCurrentTime();
 		
 		// Get the duration
 		double durationMillis =
-				player.getMedia().getDuration().toMillis();
+				player.getDuration();
 		
 		// Set the progress of the progress bar
 		progressBar.setValue(curTimeMillis / durationMillis);

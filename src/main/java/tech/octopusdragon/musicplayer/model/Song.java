@@ -40,6 +40,7 @@ public class Song implements Comparable<Song>, Serializable {
 	private String genre;
 	private int year;
 	private String duration;
+	private long durationMs;
 	
 	private Album album;
 	
@@ -105,7 +106,7 @@ public class Song implements Comparable<Song>, Serializable {
 		this(new File(filename));
 	}
 	
-	
+
 	/**
 	 * Returns the URI that represents the song's abstract path.
 	 * @return The URI that represents the song's abstract path.
@@ -113,8 +114,8 @@ public class Song implements Comparable<Song>, Serializable {
 	public String getURI() {
 		return new File(path).toURI().toString();
 	}
-	
-	
+
+
 	/**
 	 * Returns the song's abstract path.
 	 * @return The song's abstract path.
@@ -287,6 +288,7 @@ public class Song implements Comparable<Song>, Serializable {
 		
 		// Get minutes and seconds;
 		seconds = audioFile.getAudioHeader().getTrackLength();
+		this.durationMs = seconds * 1000L;
 		minutes = seconds / 60;
 		seconds = seconds % 60;
 		
@@ -374,6 +376,14 @@ public class Song implements Comparable<Song>, Serializable {
 			coverArt = ((Mp4Tag)tag).getFirstArtwork();
 		
 		return coverArt != null ? coverArt.getBinaryData() : null;
+	}
+
+
+	/**
+	 * @return the duration in milliseconds
+	 */
+	public long getDurationMs() {
+		return durationMs;
 	}
 
 

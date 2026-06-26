@@ -1,7 +1,7 @@
 module tech.octopusdragon.musicplayer {
     requires javafx.controls;
     requires javafx.fxml;
-    requires javafx.media;
+    requires uk.co.caprica.vlcj;
     requires transitive jaudiotagger;
     requires org.apache.commons.io;
     requires java.desktop;

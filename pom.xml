@@ -27,9 +27,9 @@
     <version>${javafx.version}</version>
   </dependency>
   <dependency>
-    <groupId>org.openjfx</groupId>
-    <artifactId>javafx-media</artifactId>
-    <version>${javafx.version}</version>
+    <groupId>uk.co.caprica</groupId>
+    <artifactId>vlcj</artifactId>
+    <version>4.8.3</version>
   </dependency>
 
   <dependency>

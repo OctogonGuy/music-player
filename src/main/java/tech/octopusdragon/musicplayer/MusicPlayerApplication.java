@@ -377,6 +377,8 @@ public class MusicPlayerApplication extends Application {
 		Userdata.saveProperties(true);
 		Userdata.saveLastDirectory(true);
 		Userdata.saveMusicLibrary(true);
+		
+		musicPlayer.dispose();
 	}
 	
 	

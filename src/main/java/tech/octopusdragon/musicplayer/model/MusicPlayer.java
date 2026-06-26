@@ -2,8 +2,12 @@ package tech.octopusdragon.musicplayer.model;
 
 import java.util.Comparator;
 
-import javafx.scene.media.MediaException;
 import tech.octopusdragon.musicplayer.util.Util;
+
+import uk.co.caprica.vlcj.factory.MediaPlayerFactory;
+import uk.co.caprica.vlcj.player.base.MediaPlayer;
+import uk.co.caprica.vlcj.player.base.MediaPlayerEventAdapter;
+import javafx.application.Platform;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
@@ -17,8 +21,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 public class MusicPlayer {
@@ -31,7 +33,11 @@ public class MusicPlayer {
 	private ObservableList<Song> selectedSongs;	// Songs selected in track list
 	private ObservableList<Song> songs;		// Current list of songs
 	private ObjectProperty<Song> curSong;	// The currently playing song
-	private Media media;				// Current media
+	private MediaPlayerFactory mediaPlayerFactory;
+	private MediaPlayer mediaPlayer;
+	
+	private DoubleProperty currentTime;	// Current time in milliseconds
+	private DoubleProperty duration;	// Duration in milliseconds
 	
 	// --- Properties are used here instead of primitives to allow certain
 	// things to happen  automatically when changes to these variables take
@@ -51,7 +57,11 @@ public class MusicPlayer {
 	public MusicPlayer() {
 		
 		// Initialize some variables
-		playerProperty = new SimpleObjectProperty<MediaPlayer>();
+		mediaPlayerFactory = new MediaPlayerFactory();
+		mediaPlayer = mediaPlayerFactory.mediaPlayers().newMediaPlayer();
+		playerProperty = new SimpleObjectProperty<MediaPlayer>(mediaPlayer);
+		currentTime = new SimpleDoubleProperty(0.0);
+		duration = new SimpleDoubleProperty(0.0);
 		curDirectory = new SimpleObjectProperty<Directory>();
 		curSong = new SimpleObjectProperty<Song>();
 		dirSongs = FXCollections.observableArrayList();
@@ -85,6 +95,49 @@ public class MusicPlayer {
 		
 		rate = new SimpleDoubleProperty(1.0);
 		balance = new SimpleDoubleProperty(0.0);
+
+		volume.addListener((obs, oldVal, newVal) -> {
+			mediaPlayer.audio().setVolume((int) (newVal.doubleValue() * 100));
+		});
+		mute.addListener((obs, oldVal, newVal) -> {
+			mediaPlayer.audio().setMute(newVal);
+		});
+		rate.addListener((obs, oldVal, newVal) -> {
+			mediaPlayer.controls().setRate(newVal.floatValue());
+		});
+		balance.addListener((obs, oldVal, newVal) -> {
+			// VLCj does not support balance directly
+		});
+
+		mediaPlayer.events().addMediaPlayerEventListener(new MediaPlayerEventAdapter() {
+			@Override
+			public void timeChanged(MediaPlayer mediaPlayer, long newTime) {
+				Platform.runLater(() -> currentTime.set(newTime));
+			}
+			@Override
+			public void lengthChanged(MediaPlayer mediaPlayer, long newLength) {
+				Platform.runLater(() -> duration.set(newLength));
+			}
+			@Override
+			public void finished(MediaPlayer mediaPlayer) {
+				Platform.runLater(() -> {
+					// If on repeat single, replay the track
+					if (repeatSingle.get()) {
+						restartMedia();
+					}
+
+					// Else if not on repeat and at the end, stop the media.
+					else if (!repeat.get() && index.get() == songs.size() - 1) {
+						stopMedia();
+					}
+
+					// Otherwise, the next method should take care of logic.
+					else {
+						next();
+					}
+				});
+			}
+		});
 	}
 	
 	
@@ -116,7 +169,7 @@ public class MusicPlayer {
 		}
 		
 		// Play media
-		playerProperty.get().play();
+		mediaPlayer.controls().play();
 		
 		// Update relevant variables
 		playing.set(true);
@@ -134,7 +187,7 @@ public class MusicPlayer {
 			return;
 		
 		// Pause media
-		playerProperty.get().pause();
+		mediaPlayer.controls().pause();
 		
 		// Update relevant variables
 		playing.set(false);
@@ -151,7 +204,7 @@ public class MusicPlayer {
 			return;
 		
 		// Stop media
-		playerProperty.get().stop();
+		mediaPlayer.controls().stop();
 		
 		// Set the current song to null
 		curSong.set(null);
@@ -161,6 +214,8 @@ public class MusicPlayer {
 			playing.set(false);
 		loaded.set(false);
 		index.set(-1);
+		currentTime.set(0.0);
+		duration.set(0.0);
 	}
 	
 	
@@ -174,7 +229,7 @@ public class MusicPlayer {
 			return;
 		
 		// Restart
-		playerProperty.get().seek(Duration.seconds(0.0));
+		newMedia(index.get());
 	}
 	
 	
@@ -239,55 +294,23 @@ public class MusicPlayer {
 		
 		// Stop current media if playing
 		else if (playing.get())
-			playerProperty.get().stop();
+			mediaPlayer.controls().stop();
 		
 		// Initialize the new media
 		curSong.set(songs.get(newIndex));
-		System.out.println("Loading media: " + curSong.getValue().getURI());
-		media = new Media(curSong.getValue().getURI().toString());
-		try {
-			playerProperty.set(new MediaPlayer(media));
-		}
-		catch (MediaException | IllegalArgumentException exception) {
-			System.err.println("Failed to create media player for: " + curSong.getValue().getURI());
-			System.err.println(exception);
-			System.err.println("Message: " + exception.getMessage());
-			System.err.println("Cause: " + exception.getCause());
-			exception.printStackTrace();
+		currentTime.set(0.0);
+		duration.set(curSong.get().getDurationMs());
+		System.out.println("Loading media: " + curSong.getValue().getPath());
+		mediaPlayer.media().startPaused(curSong.getValue().getPath());
 
-			//media = null;
-			//playerProperty.set(null);
-			//loaded.set(false);
-			//playing.set(false);
-			//index.set(-1);
-		}
-		playerProperty.get().setOnEndOfMedia(new Runnable() {
-			@Override
-			public void run() {
-				// If on repeat single, replay the track
-				if (repeatSingle.get()) {
-					restartMedia();
-				}
-				
-				// Else if not on repeat and at the end, stop the media.
-				else if (!repeat.get() && index.get() == songs.size() - 1) {
-					stopMedia();
-				}
-				
-				// Otherwise, the next method should take care of logic.
-				else {
-					next();
-				}
-			}
-		});
-		playerProperty.get().muteProperty().bind(mute);
-		playerProperty.get().volumeProperty().bind(volume);
-		playerProperty.get().rateProperty().bind(rate);
-		playerProperty.get().balanceProperty().bind(balance);
+		mediaPlayer.audio().setVolume((int) (volume.get() * 100));
+		mediaPlayer.audio().setMute(mute.get());
+		mediaPlayer.controls().setRate((float) rate.get());
+		// VLCj does not support balance directly
 		
 		// Play media if it was playing before
 		if (playing.get())
-			playerProperty.get().play();
+			mediaPlayer.controls().play();
 		
 		// Set relevant variables
 		if (!loaded.get())
@@ -364,7 +387,7 @@ public class MusicPlayer {
 			return;
 		
 		// Seek
-		playerProperty.get().seek(Duration.millis(position));
+		mediaPlayer.controls().setTime((long) position);
 	}
 	
 	
@@ -379,8 +402,7 @@ public class MusicPlayer {
 			return;
 		
 		// Seek
-		playerProperty.get().seek(Duration.millis(
-				playerProperty.get().getCurrentTime().toMillis() + amount));
+		mediaPlayer.controls().skipTime((long) amount);
 	}
 	
 	
@@ -586,10 +608,34 @@ public class MusicPlayer {
 
 
 	/**
-	 * @return the media
+	 * @return the current time property
 	 */
-	public Media getMedia() {
-		return media;
+	public DoubleProperty currentTimeProperty() {
+		return currentTime;
+	}
+
+
+	/**
+	 * @return the current time in milliseconds
+	 */
+	public double getCurrentTime() {
+		return currentTime.get();
+	}
+
+
+	/**
+	 * @return the duration property
+	 */
+	public DoubleProperty durationProperty() {
+		return duration;
+	}
+
+
+	/**
+	 * @return the duration in milliseconds
+	 */
+	public double getDuration() {
+		return duration.get();
 	}
 	
 
@@ -854,5 +900,18 @@ public class MusicPlayer {
 	 */
 	public void setBalance(double balance) {
 		this.balanceProperty().set(balance);
+	}
+
+
+	/**
+	 * Releases VLCj resources
+	 */
+	public void dispose() {
+		if (mediaPlayer != null) {
+			mediaPlayer.release();
+		}
+		if (mediaPlayerFactory != null) {
+			mediaPlayerFactory.release();
+		}
 	}
 }

@@ -1,3 +1,9 @@
+/* --- Fonts --- */
+@font-face {
+	font-family: "LXGW WenKai Medium";
+	src: url('../fonts/LXGWWenKai-Medium.ttf');
+}
+
 /* --- Colors to add in theme stylesheets --- */
 .root {
 	-cell-1-color: #f1f8fc;
@@ -64,7 +70,7 @@
 /* General */
 
 .root * {
-	-fx-font-family: "Varela Round";
+	-fx-font-family: "LXGW WenKai Medium", sans-serif;
 	-fx-text-fill: -text-color;
 }
 
